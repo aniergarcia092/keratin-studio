@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5a3d8a">
+<title>Keratin Studio · Citas, Productos y Belleza</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="manifest" href='data:application/manifest+json,{"name":"Keratin Studio","short_name":"Keratin","start_url":".","display":"standalone","background_color":"%235a3d8a","theme_color":"%235a3d8a","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2921/2921822.png","sizes":"512x512","type":"image/png"}]}'>
+<style>
+:root{
+  --bg-primary:#f7f5fc;--bg-secondary:#fff;--bg-card:#fff;--text-primary:#2a1f3d;
+  --text-secondary:#6b5e7d;--accent:#5a3d8a;--accent-light:#b28dd6;--accent-hover:#3f2a63;
+  --border:#e7ddf5;--shadow:rgba(90,61,138,.08);--hero-overlay:rgba(90,61,138,.78);
+  --empty-bg:#faf7ff;--input-bg:#faf7ff;--gold:#d4af37;
+}
+body.night-mode{
+  --bg-primary:#14101f;--bg-secondary:#1c1730;--bg-card:#221c38;--text-primary:#f0e9ff;
+  --text-secondary:#b8a9d4;--accent:#b28dd6;--accent-light:#8e6bc0;--accent-hover:#d4b8f0;
+  --border:#3a2f5c;--shadow:rgba(0,0,0,.4);--hero-overlay:rgba(20,16,31,.85);
+  --empty-bg:#1c1730;--input-bg:#2a2344;--gold:#e8c76a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;background:var(--bg-primary);color:var(--text-primary);
+  line-height:1.5;padding:2rem 1.5rem;transition:background .4s,color .4s;
+  background-image:
+    radial-gradient(circle at 15% 20%,rgba(178,141,214,.08) 0%,transparent 40%),
+    radial-gradient(circle at 85% 80%,rgba(90,61,138,.06) 0%,transparent 40%);
+  background-attachment:fixed;
+}
+body.night-mode{background-image:
+  radial-gradient(circle at 15% 20%,rgba(178,141,214,.12) 0%,transparent 40%),
+  radial-gradient(circle at 85% 80%,rgba(90,61,138,.15) 0%,transparent 40%)}
+.container{max-width:1200px;margin:0 auto}
+
+/* Top bar */
+.topbar{
+  background:linear-gradient(90deg,var(--accent),var(--accent-light));
+  color:#fff;text-align:center;padding:.6rem 1rem;border-radius:50px;
+  font-size:.9rem;font-weight:600;margin-bottom:1rem;
+  display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;
+}
+.topbar i{margin-right:.4rem}
+
+/* Header */
+header{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  margin-bottom:2.5rem;padding-bottom:1rem;border-bottom:2px solid var(--border)
+}
+.logo h1{font-family:'Playfair Display',serif;font-weight:600;font-size:2.2rem;letter-spacing:-.5px;color:var(--accent)}
+.logo span{color:var(--accent-light);font-style:italic}
+.header-controls{display:flex;align-items:center;gap:1rem}
+.nav-icons a{color:var(--accent);margin-left:1rem;font-size:1.3rem;transition:color .2s;text-decoration:none}
+.nav-icons a:hover{color:var(--accent-light)}
+.theme-toggle,.cart-btn,.admin-btn{
+  background:var(--bg-card);border:1.5px solid var(--border);color:var(--accent);
+  width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.05rem;
+  display:flex;align-items:center;justify-content:center;transition:all .3s;
+  box-shadow:0 2px 8px var(--shadow);position:relative
+}
+.theme-toggle:hover,.cart-btn:hover,.admin-btn:hover{background:var(--accent);color:#fff;transform:rotate(15deg)}
+.cart-count{
+  position:absolute;top:-4px;right:-4px;background:#e74c3c;color:#fff;
+  font-size:.7rem;min-width:18px;height:18px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-weight:700;padding:0 4px
+}
+
+/* Frase motivacional */
+.quote{
+  text-align:center;font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.15rem;color:var(--accent-light);margin-bottom:1.5rem;padding:1rem;
+  border-radius:20px;background:var(--bg-card);border:1px dashed var(--border)
+}
+
+/* Hero */
+.hero{
+  position:relative;border-radius:40px;padding:5rem 2rem;margin-bottom:2rem;
+  text-align:center;overflow:hidden;box-shadow:0 18px 36px -14px var(--shadow);
+  background:
+    linear-gradient(135deg,var(--hero-overlay) 0%,rgba(63,42,99,.85) 100%),
+    url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&q=80') center/cover no-repeat;
+  background-blend-mode:overlay
+}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.12),transparent 60%);pointer-events:none}
+.hero-icons{position:absolute;inset:0;pointer-events:none;z-index:1}
+.hero-icon{position:absolute;font-size:3rem;color:rgba(255,255,255,.35);text-shadow:0 4px 20px rgba(0,0,0,.3);animation:float 6s ease-in-out infinite}
+.hero-icon.dryer{top:15%;left:8%}
+.hero-icon.flatiron{bottom:15%;right:8%;animation-delay:3s}
+.hero-icon.scissors{top:20%;right:15%;font-size:2.2rem;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-15px) rotate(5deg)}}
+.hero h2{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:600;color:#fff;margin-bottom:.75rem;text-shadow:0 4px 20px rgba(0,0,0,.25);position:relative;z-index:2}
+.hero p{font-size:1.2rem;color:#f3ebff;max-width:620px;margin:0 auto;text-shadow:0 2px 10px rgba(0,0,0,.25);position:relative;z-index:2}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:.6rem;margin-top:1.5rem;
+  background:var(--gold);color:#3f2a63;padding:.85rem 1.8rem;border-radius:50px;
+  font-weight:700;text-decoration:none;position:relative;z-index:2;
+  box-shadow:0 8px 22px rgba(212,175,55,.4);transition:transform .25s
+}
+.hero-cta:hover{transform:scale(1.05)}
+
+/* Secciones */
+.section-title{
+  font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;color:var(--accent);
+  margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem
+}
+.section-title i{color:var(--accent-light);font-size:1.8rem}
+section{scroll-margin-top:2rem}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Contadores */
+.counters{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.2rem;
+  margin:2rem 0 3rem
+}
+.counter-card{
+  background:var(--bg-card);border-radius:24px;padding:1.5rem;text-align:center;
+  border:1px solid var(--border);box-shadow:0 6px 16px var(--shadow)
+}
+.counter-num{
+  font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;
+  color:var(--accent);display:block
+}
+.counter-label{font-size:.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px}
+
+/* Filtros */
+.filters{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:1.5rem;align-items:center}
+.filter-btn{
+  background:var(--bg-card);border:1.5px solid var(--border);color:var(--text-primary);
+  padding:.5rem 1.2rem;border-radius:50px;cursor:pointer;font-weight:600;
+  font-size:.85rem;transition:all .2s
+}
+.filter-btn:hover{border-color:var(--accent-light)}
+.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.price-filter{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--text-secondary)}
+.price-filter input{accent-color:var(--accent)}
+
+/* Productos */
+.products-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.8rem;margin-bottom:3rem
+}
+.product-card{
+  background:var(--bg-card);border-radius:28px;overflow:hidden;
+  box-shadow:0 8px 20px var(--shadow);transition:transform .25s,box-shadow .25s;
+  border:1px solid var(--border);display:flex;flex-direction:column;position:relative
+}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 22px 32px -12px var(--shadow);border-color:var(--accent-light)}
+.product-img{width:100%;height:180px;object-fit:cover;display:block;background:linear-gradient(135deg,#ede0fa,#d8c5ef)}
+.product-badge{
+  position:absolute;top:12px;left:12px;padding:.3rem .8rem;border-radius:30px;
+  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff
+}
+.badge-best{background:#e74c3c}
+.badge-new{background:#27ae60}
+.badge-sale{background:#f39c12}
+.product-body{padding:1.3rem;display:flex;flex-direction:column;flex:1}
+.product-tag{
+  display:inline-block;font-size:.7rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.5px;padding:.22rem .8rem;border-radius:30px;width:fit-content;margin-bottom:.6rem
+}
+.tag-botox{background:#ede0fa;color:#6b3fa0}
+.tag-queratina{background:#e0f0fa;color:#2f5d8a}
+body.night-mode .tag-botox{background:#3a2a5c;color:#d4b8f0}
+body.night-mode .tag-queratina{background:#1f3a52;color:#9ec9ec}
+.product-card h3{font-size:1.15rem;font-weight:700;margin-bottom:.4rem;color:var(--text-primary)}
+.product-desc{font-size:.85rem;color:var(--text-secondary);margin-bottom:.7rem;flex:1}
+.stars{color:var(--gold);font-size:.85rem;margin-bottom:.5rem}
+.stars span{color:var(--text-secondary);margin-left:.4rem;font-size:.78rem}
+.stock{font-size:.75rem;color:#e67e22;font-weight:600;margin-bottom:.6rem}
+.product-price{font-weight:700;font-size:1.3rem;color:var(--accent);margin-bottom:.8rem}
+.product-price small{font-size:.78rem;font-weight:400;color:var(--accent-light);text-decoration:line-through;margin-left:.4rem}
+.product-actions{display:flex;gap:.5rem}
+.btn-product,.btn-cart{
+  flex:1;background:var(--empty-bg);border:1px solid transparent;border-radius:50px;
+  padding:.65rem .6rem;font-weight:600;font-size:.82rem;color:var(--accent);
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;
+  justify-content:center;gap:.35rem
+}
+.btn-product:hover,.btn-cart:hover{background:var(--accent);color:#fff}
+.btn-cart{background:var(--accent);color:#fff}
+.btn-cart:hover{background:var(--accent-hover)}
+
+/* Antes/Después slider */
+.before-after{margin-bottom:3rem;text-align:center}
+.ba-container{
+  position:relative;width:100%;max-width:700px;margin:0 auto;
+  border-radius:28px;overflow:hidden;box-shadow:0 18px 36px -14px var(--shadow);
+  aspect-ratio:16/10;user-select:none;cursor:ew-resize
+}
+.ba-container img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-after{clip-path:inset(0 50% 0 0)}
+.ba-handle{
+  position:absolute;top:0;bottom:0;left:50%;width:4px;background:#fff;
+  transform:translateX(-50%);z-index:3;box-shadow:0 0 12px rgba(0,0,0,.4)
+}
+.ba-handle::after{
+  content:'\f337';font-family:'Font Awesome 6 Free';font-weight:900;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:44px;height:44px;border-radius:50%;background:#fff;color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  box-shadow:0 4px 12px rgba(0,0,0,.3)
+}
+.ba-label{position:absolute;top:14px;padding:.35rem .9rem;border-radius:30px;font-weight:700;font-size:.75rem;background:rgba(0,0,0,.55);color:#fff;z-index:4;text-transform:uppercase}
+.ba-label.before-l{left:14px}
+.ba-label.after-r{right:14px}
+
+/* Estilistas */
+.stylists-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-bottom:3rem}
+.stylist-card{
+  background:var(--bg-card);border-radius:28px;padding:1.5rem;text-align:center;
+  border:1px solid var(--border);box-shadow:0 6px 16px var(--shadow);transition:transform .25s
+}
+.stylist-card:hover{transform:translateY(-5px)}
+.stylist-card img{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:.8rem;border:3px solid var(--accent-light)}
+.stylist-card h4{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--accent);margin-bottom:.25rem}
+.stylist-card p{font-size:.82rem;color:var(--text-secondary);margin-bottom:.8rem}
+.stylist-card button{
+  background:var(--accent);color:#fff;border:none;border-radius:50px;
+  padding:.5rem 1.2rem;font-weight:600;font-size:.82rem;cursor:pointer;transition:background .2s
+}
+.stylist-card button:hover{background:var(--accent-hover)}
+
+/* Testimonios */
+.testimonials{position:relative;margin-bottom:3rem;overflow:hidden}
+.testi-track{display:flex;transition:transform .6s ease}
+.testi-card{
+  min-width:100%;background:var(--bg-card);border-radius:28px;padding:2rem;
+  text-align:center;border:1px solid var(--border);box-shadow:0 8px 20px var(--shadow)
+}
+.testi-card img{width:70px;height:70px;border-radius:50%;object-fit:cover;margin-bottom:.8rem;border:3px solid var(--accent-light)}
+.testi-card p{font-style:italic;color:var(--text-secondary);margin-bottom:1rem;max-width:600px;margin-left:auto;margin-right:auto}
+.testi-card h5{font-family:'Playfair Display',serif;color:var(--accent);font-size:1.05rem}
+.testi-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1rem}
+.testi-dot{width:10px;height:10px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:background .2s}
+.testi-dot.active{background:var(--accent)}
+
+/* Booking */
+.booking-section{background:var(--bg-card);border-radius:40px;padding:2.5rem 2rem;box-shadow:0 22px 36px -14px var(--shadow);border:1px solid var(--border);margin-bottom:2.5rem}
+.booking-section h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.booking-section h2 i{color:var(--accent-light)}
+.cancel-policy{
+  background:var(--empty-bg);border-left:4px solid var(--accent-light);
+  padding:.8rem 1rem;border-radius:12px;font-size:.82rem;color:var(--text-secondary);margin-bottom:1.5rem
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem 1.5rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group.full-width{grid-column:span 2}
+.form-group label{font-weight:600;font-size:.88rem;color:var(--accent);display:flex;align-items:center;gap:.5rem}
+.form-group label i{color:var(--accent-light);width:1.1rem}
+.form-group input,.form-group select,.form-group textarea{
+  padding:.85rem 1.1rem;border-radius:50px;border:1.5px solid var(--border);
+  background:var(--input-bg);font-family:'Inter',sans-serif;font-size:.95rem;
+  outline:none;color:var(--text-primary);transition:border .2s,box-shadow .2s
+}
+.form-group textarea{border-radius:20px;resize:vertical;min-height:80px}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--accent-light);box-shadow:0 0 0 4px rgba(178,141,214,.15)
+}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:.6rem;margin-top:.4rem}
+.slot{
+  padding:.6rem;border-radius:14px;background:var(--empty-bg);border:1.5px solid var(--border);
+  text-align:center;font-weight:600;font-size:.85rem;color:var(--text-primary);cursor:pointer;transition:all .2s
+}
+.slot:hover:not(.disabled){border-color:var(--accent-light);background:var(--bg-card)}
+.slot.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+.slot.disabled{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.coupon-row{display:flex;gap:.6rem}
+.coupon-row input{flex:1}
+.coupon-row button{
+  background:var(--accent-light);color:#fff;border:none;border-radius:50px;
+  padding:0 .9rem;font-weight:600;cursor:pointer;font-size:.85rem;white-space:nowrap
+}
+.btn-submit{
+  grid-column:span 2;background:var(--accent);color:#fff;border:none;border-radius:50px;
+  padding:1.05rem 2rem;font-size:1.05rem;font-weight:600;cursor:pointer;
+  transition:all .25s;display:flex;align-items:center;justify-content:center;
+  gap:.7rem;margin-top:.5rem;box-shadow:0 10px 22px -8px var(--shadow)
+}
+.btn-submit:hover{background:var(--accent-hover);transform:scale(1.01)}
+
+/* Citas */
+.appointments-section{margin-top:1.5rem;padding-top:1rem}
+.appointments-section h3{font-size:1.4rem;font-family:'Playfair Display',serif;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.appointment-list{display:flex;flex-direction:column;gap:.9rem}
+.appointment-item{
+  background:var(--empty-bg);border-radius:24px;padding:1.1rem 1.4rem;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  border:1px solid var(--border);transition:background .2s;box-shadow:0 2px 8px var(--shadow)
+}
+.appointment-item.completed{opacity:.7}
+.appointment-item.cancelled{opacity:.55;text-decoration:line-through}
+.appointment-info{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem}
+.appointment-info span{display:flex;align-items:center;gap:.5rem;font-size:.92rem;color:var(--text-primary)}
+.appointment-info i{color:var(--accent-light);width:1.1rem;text-align:center}
+.appointment-badge{background:#e0f0fa;color:#2f5d8a;font-weight:600;font-size:.72rem;padding:.3rem .9rem;border-radius:30px;text-transform:uppercase;letter-spacing:.3px}
+.badge-completed{background:#d5f5e3;color:#1e8449}
+.badge-cancelled{background:#fadbd8;color:#922b21}
+body.night-mode .appointment-badge{background:#1f3a52;color:#9ec9ec}
+body.night-mode .badge-completed{background:#1e3a28;color:#7ee2a8}
+body.night-mode .badge-cancelled{background:#3a1e1e;color:#f5a5a0}
+.appointment-actions{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.icon-btn{
+  background:transparent;border:1px solid var(--border);color:var(--accent-light);
+  width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;transition:all .2s
+}
+.icon-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.icon-btn.danger:hover{background:#e74c3c;border-color:#e74c3c}
+.empty-message{text-align:center;padding:2rem;color:var(--text-secondary);font-style:italic;background:var(--empty-bg);border-radius:24px;border:1px dashed var(--border)}
+
+/* Fidelidad */
+.loyalty{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%);
+  color:#fff;border-radius:28px;padding:1.8rem;margin-bottom:3rem;
+  display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:space-between;
+  box-shadow:0 15px 30px -12px rgba(90,61,138,.4)
+}
+.loyalty-info h4{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:.3rem}
+.loyalty-info p{font-size:.9rem;opacity:.9}
+.loyalty-dots{display:flex;gap:.5rem}
+.loyalty-dot{
+  width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;
+  border:2px solid rgba(255,255,255,.4)
+}
+.loyalty-dot.filled{background:var(--gold);color:#3f2a63;border-color:var(--gold)}
+
+/* FAQ */
+.faq-item{background:var(--bg-card);border-radius:20px;margin-bottom:.8rem;border:1px solid var(--border);overflow:hidden}
+.faq-q{
+  padding:1.1rem 1.4rem;cursor:pointer;display:flex;justify-content:space-between;
+  align-items:center;font-weight:600;color:var(--text-primary);font-size:.95rem
+}
+.faq-q i{color:var(--accent-light);transition:transform .3s}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;padding:0 1.4rem;color:var(--text-secondary);font-size:.88rem}
+.faq-item.open .faq-a{max-height:300px;padding:0 1.4rem 1.1rem}
+
+/* Newsletter */
+.newsletter{
+  background:var(--bg-card);border-radius:28px;padding:2rem;text-align:center;
+  border:1px solid var(--border);margin:2rem 0;box-shadow:0 8px 20px var(--shadow)
+}
+.newsletter h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--accent);margin-bottom:.4rem}
+.newsletter p{color:var(--text-secondary);font-size:.9rem;margin-bottom:1rem}
+.newsletter form{display:flex;gap:.6rem;max-width:450px;margin:0 auto;flex-wrap:wrap}
+.newsletter input{flex:1;min-width:180px;padding:.85rem 1.2rem;border-radius:50px;border:1.5px solid var(--border);background:var(--input-bg);color:var(--text-primary);font-size:.9rem;outline:none}
+.newsletter button{background:var(--accent);color:#fff;border:none;border-radius:50px;padding:.85rem 1.6rem;font-weight:600;cursor:pointer}
+
+/* Redes */
+.social-share{display:flex;justify-content:center;gap:.8rem;margin:2rem 0;flex-wrap:wrap}
+.social-share a{
+  width:44px;height:44px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;color:#fff;text-decoration:none;font-size:1.05rem;transition:transform .2s
+}
+.social-share a:hover{transform:scale(1.15) rotate(8deg)}
+.sh-fb{background:#1877f2}.sh-ig{background:linear-gradient(45deg,#f09433,#dc2743,#bc1888)}
+.sh-tt{background:#000}.sh-wa{background:#25d366}
+
+/* Map */
+.map-wrap{border-radius:28px;overflow:hidden;margin:2rem 0;box-shadow:0 8px 20px var(--shadow);border:1px solid var(--border)}
+.map-wrap iframe{width:100%;height:300px;border:0;display:block}
+
+/* WhatsApp flotante */
+.wa-float{
+  position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;
+  background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:1.7rem;box-shadow:0 8px 22px rgba(37,211,102,.5);z-index:999;
+  text-decoration:none;transition:transform .25s;animation:pulse 2s infinite
+}
+.wa-float:hover{transform:scale(1.1)}
+@keyframes pulse{0%,100%{box-shadow:0 8px 22px rgba(37,211,102,.5)}50%{box-shadow:0 8px 32px rgba(37,211,102,.8)}}
+
+/* Modal (carrito + admin) */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
+  z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:var(--bg-card);border-radius:32px;padding:2rem;max-width:520px;width:100%;
+  max-height:90vh;overflow-y:auto;box-shadow:0 30px 60px rgba(0,0,0,.5);position:relative
+}
+.modal h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.modal-close{position:absolute;top:1rem;right:1rem;background:transparent;border:none;font-size:1.3rem;color:var(--text-secondary);cursor:pointer}
+.cart-item{display:flex;gap:.8rem;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--border)}
+.cart-item img{width:50px;height:50px;border-radius:12px;object-fit:cover}
+.cart-item-info{flex:1}
+.cart-item-info h5{font-size:.9rem;color:var(--text-primary)}
+.cart-item-info p{font-size:.8rem;color:var(--text-secondary)}
+.cart-total{font-size:1.2rem;font-weight:700;color:var(--accent);text-align:right;margin:1rem 0}
+.admin-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-bottom:1rem}
+.admin-stat{background:var(--empty-bg);border-radius:16px;padding:1rem;text-align:center;border:1px solid var(--border)}
+.admin-stat strong{display:block;font-size:1.6rem;color:var(--accent);font-family:'Playfair Display',serif}
+.admin-stat span{font-size:.75rem;color:var(--text-secondary);text-transform:uppercase}
+
+/* Footer */
+footer{margin-top:3rem;text-align:center;font-size:.88rem;color:var(--text-secondary);border-top:1px solid var(--border);padding-top:1.8rem}
+footer .schedule{margin-bottom:.8rem;font-size:.85rem}
+footer .schedule i{color:var(--accent-light);margin-right:.4rem}
+
+/* Confeti */
+.confetti{position:fixed;top:-10px;width:10px;height:10px;z-index:2000;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+/* Responsive */
+@media(max-width:700px){
+  body{padding:1rem}
+  .hero{padding:3rem 1.5rem}
+  .hero h2{font-size:2rem}
+  .hero-icon{font-size:2rem}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full-width,.btn-submit{grid-column:span 1}
+  .appointment-info{gap:.8rem;flex-direction:column;align-items:flex-start}
+  .price-filter{margin-left:0;width:100%}
+  .loyalty{flex-direction:column;text-align:center}
+  .topbar{font-size:.78rem;gap:.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/34612345678?text=Hola!%20Quiero%20agendar%20una%20cita%20en%20Keratin%20Studio" class="wa-float" target="_blank" title="Escríbenos por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<div class="container">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <span><i class="fas fa-clock"></i> Lun-Vie 9:00-19:00 · Sáb 9:00-14:00</span>
+    <span><i class="fas fa-map-marker-alt"></i> Av. Belleza 123, Ciudad</span>
+    <span><i class="fas fa-phone"></i> +34 612 345 678</span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><h1>Keratin <span>Studio</span></h1></div>
+    <div class="header-controls">
+      <div class="nav-icons">
+        <a href="#productos" title="Productos"><i class="fas fa-spa"></i></a>
+        <a href="#agendar" title="Agendar cita"><i class="fas fa-calendar-alt"></i></a>
+        <a href="#faq" title="FAQ"><i class="fas fa-question-circle"></i></a>
+      </div>
+      <button class="cart-btn" id="cartBtn" title="Carrito"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></button>
+      <button class="admin-btn" id="adminBtn" title="Panel Admin"><i class="fas fa-user-shield"></i></button>
+      <button class="theme-toggle" id="themeToggle" title="Modo noche/día"><i class="fas fa-moon"></i></button>
+    </div>
+  </header>
+
+  <!-- Frase motivacional -->
+  <div class="quote" id="dailyQuote"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-icons">
+      <i class="fas fa-wind hero-icon dryer"></i>
+      <i class="fas fa-fire hero-icon flatiron"></i>
+      <i class="fas fa-cut hero-icon scissors"></i>
+    </div>
+    <h2>Brillo y suavidad profesional</h2>
+    <p>Tratamientos de queratina y botox capilar · Agenda tu cita y luce un cabello espectacular</p>
+    <a href="#agendar" class="hero-cta"><i class="fas fa-calendar-check"></i> Agendar ahora</a>
+  </section>
+
+  <!-- Contadores -->
+  <div class="counters reveal">
+    <div class="counter-card"><span class="counter-num" data-target="1250">0</span><span class="counter-label">Clientas felices</span></div>
+    <div class="counter-card"><span class="counter-num" data-target="12">0</span><span class="counter-label">Años de experiencia</span></div>
+    <div class="counter-card"><span class="counter-num" data-target="3400">0</span><span class="counter-label">Tratamientos hechos</span></div>
+    <div class="counter-card"><span class="counter-num" data-target="98">0</span><span class="counter-label">% Satisfacción</span></div>
+  </div>
+
+  <!-- Productos -->
+  <section id="productos" class="reveal">
+    <div class="section-title"><i class="fas fa-tags"></i> Nuestros productos</div>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="botox">Botox</button>
+      <button class="filter-btn" data-filter="queratina">Queratina</button>
+      <div class="price-filter">
+        <label>Máx: <strong id="priceVal">80 €</strong></label>
+        <input type="range" id="priceRange" min="30" max="80" value="80" step="5">
+      </div>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+  <!-- Antes / Después -->
+  <section class="before-after reveal">
+    <div class="section-title"><i class="fas fa-magic"></i> Resultados reales · Antes y después</div>
+    <div class="ba-container" id="baContainer">
+      <img class="ba-before" src="https://images.unsplash.com/photo-1595959183082-7b570b7e08e0?w=1000&q=80" alt="Antes">
+      <img class="ba-after" src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1000&q=80" alt="Después">
+      <span class="ba-label before-l">Antes</span>
+      <span class="ba-label after-r">Después</span>
+      <div class="ba-handle" id="baHandle"></div>
+    </div>
+  </section>
+
+  <!-- Estilistas -->
+  <section class="reveal">
+    <div class="section-title"><i class="fas fa-user-tie"></i> Nuestro equipo</div>
+    <div class="stylists-grid">
+      <div class="stylist-card">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt="María">
+        <h4>María López</h4>
+        <p>Especialista en Queratina</p>
+        <button data-stylist="María López">Agendar con ella</button>
+      </div>
+      <div class="stylist-card">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt="Ana">
+        <h4>Ana Ruiz</h4>
+        <p>Especialista en Botox Capilar</p>
+        <button data-stylist="Ana Ruiz">Agendar con ella</button>
+      </div>
+      <div class="stylist-card">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80" alt="Carla">
+        <h4>Carla Méndez</h4>
+        <p>Colorista y Alisados</p>
+        <button data-stylist="Carla Méndez">Agendar con ella</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="testimonials reveal">
+    <div class="section-title"><i class="fas fa-star"></i> Lo que dicen nuestras clientas</div>
+    <div class="testi-track" id="testiTrack">
+      <div class="testi-card">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Cliente">
+        <div class="stars">★★★★★</div>
+        <p>"Increíble. Mi cabello quedó como espejo y el rizo desapareció. Lo mejor, el trato del equipo."</p>
+        <h5>Laura G.</h5>
+      </div>
+      <div class="testi-card">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Cliente">
+        <div class="stars">★★★★★</div>
+        <p>"Tenía el pelo muy dañado por la deco y con la queratina con colágeno lo recuperé. ¡100% recomendado!"</p>
+        <h5>Sofía M.</h5>
+      </div>
+      <div class="testi-card">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80" alt="Cliente">
+        <div class="stars">★★★★★</div>
+        <p>"El botox capilar me devolvió el brillo. Además, agendar por la web es súper fácil y llegó el correo al instante."</p>
+        <h5>Valentina R.</h5>
+      </div>
+    </div>
+    <div class="testi-dots" id="testiDots"></div>
+  </section>
+
+  <!-- Fidelidad -->
+  <div class="loyalty reveal">
+    <div class="loyalty-info">
+      <h4><i class="fas fa-gift"></i> Tarjeta de fidelidad</h4>
+      <p>Acumula 5 citas y la 6ª es <strong>GRATIS</strong>. ¡Ya llevas <span id="loyaltyCount">0</span>/5!</p>
+    </div>
+    <div class="loyalty-dots" id="loyaltyDots"></div>
+  </div>
+
+  <!-- Agendar -->
+  <section id="agendar" class="booking-section reveal">
+    <h2><i class="fas fa-calendar-check"></i> Agenda tu cita</h2>
+    <div class="cancel-policy">
+      <i class="fas fa-info-circle"></i> <strong>Política de cancelación:</strong> puedes cancelar o reprogramar sin coste hasta 24 h antes. Después se cobra el 50%.
+    </div>
+    <form id="bookingForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label><i class="fas fa-phone-alt"></i> Número de contacto</label>
+          <input type="tel" id="clientNumber" placeholder="+34 612 345 678" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-calendar-day"></i> Día de la cita</label>
+          <input type="date" id="appointmentDate" required>
+        </div>
+        <div class="form-group full-width">
+          <label><i class="fas fa-clock"></i> Horario disponible</label>
+          <div class="slots" id="slotsContainer"></div>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-concierge-bell"></i> Tratamiento</label>
+          <select id="productSelect" required></select>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-user-tie"></i> Estilista</label>
+          <select id="stylistSelect">
+            <option value="">Sin preferencia</option>
+            <option value="María López">María López</option>
+            <option value="Ana Ruiz">Ana Ruiz</option>
+            <option value="Carla Méndez">Carla Méndez</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> Nombre (opcional)</label>
+          <input type="text" id="clientName" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> Tu correo</label>
+          <input type="email" id="clientEmail" placeholder="tu@correo.com" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-birthday-cake"></i> Fecha de cumpleaños (opcional)</label>
+          <input type="date" id="clientBirthday">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-tag"></i> Código de descuento</label>
+          <div class="coupon-row">
+            <input type="text" id="couponInput" placeholder="Ej: KERATIN10">
+            <button type="button" id="applyCoupon">Aplicar</button>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label><i class="fas fa-comment"></i> Notas (opcional)</label>
+          <textarea id="clientNotes" placeholder="Alergias, preferencias..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit"><i class="fas fa-check-circle"></i> Reservar cita</button>
+      </div>
+    </form>
+
+    <div class="appointments-section">
+      <h3><i class="fas fa-list-ul"></i> Citas agendadas <span id="nextAppointmentInfo" style="font-size:.8rem;color:var(--accent-light);font-weight:400"></span></h3>
+      <div id="appointmentList" class="appointment-list">
+        <div class="empty-message">No hay citas agendadas todavía.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="reveal">
+    <div class="section-title"><i class="fas fa-question-circle"></i> Preguntas frecuentes</div>
+    <div class="faq-item"><div class="faq-q">¿Cuánto dura el tratamiento de queratina? <i class="fas fa-chevron-down"></i></div><div class="faq-a">Entre 2 y 3 horas según el largo y volumen del cabello. El resultado dura de 3 a 5 meses.</div></div>
+    <div class="faq-item"><div class="faq-q">¿Puedo lavarme el pelo el mismo día? <i class="fas fa-chevron-down"></i></div><div class="faq-a">Debes esperar 72 h para lavarlo y evitar mojarlo. Usa champú sin sulfatos.</div></div>
+    <div class="faq-item"><div class="faq-q">¿El botox capilar daña el pelo? <i class="fas fa-chevron-down"></i></div><div class="faq-a">No, al contrario: rellena la fibra capilar y aporta brillo. Es un tratamiento reparador.</div></div>
+    <div class="faq-item"><div class="faq-q">¿Cómo puedo cancelar mi cita? <i class="fas fa-chevron-down"></i></div><div class="faq-a">Escríbenos por WhatsApp o llámanos con al menos 24 h de antelación sin coste.</div></div>
+  </section>
+
+  <!-- Newsletter -->
+  <div class="newsletter reveal">
+    <h3><i class="fas fa-envelope-open-text"></i> Suscríbete a nuestras ofertas</h3>
+    <p>Recibe descuentos exclusivos y novedades antes que nadie.</p>
+    <form id="newsletterForm">
+      <input type="email" id="newsletterEmail" placeholder="tu@correo.com" required>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Suscribirme</button>
+    </form>
+  </div>
+
+  <!-- Redes -->
+  <div class="social-share reveal">
+    <a href="https://facebook.com/sharer/sharer.php?u=https://keratinstudio.com" target="_blank" class="sh-fb" title="Compartir en Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://twitter.com/intent/tweet?text=Mira%20Keratin%20Studio&url=https://keratinstudio.com" target="_blank" class="sh-tt" title="Compartir en X"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://wa.me/?text=Mira%20Keratin%20Studio%20https://keratinstudio.com" target="_blank" class="sh-wa" title="Compartir en WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://instagram.com" target="_blank" class="sh-ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+  </div>
+
+  <!-- Mapa -->
+  <div class="map-wrap reveal">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.5!2d-3.7037!3d40.4168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI1JzAwLjUiTiAzwrA0MicxMy4zIlc!5e0!3m2!1ses!2ses!4v1600000000000" loading="lazy"></iframe>
+  </div>
+
+  <footer>
+    <p class="schedule"><i class="fas fa-clock"></i> Lun-Vie 9:00-19:00 · Sáb 9:00-14:00 · Dom cerrado</p>
+    <p>© 2025 Keratin Studio · Todos los derechos reservados · Hecho con 💜 para tu cabello</p>
+  </footer>
+</div>
+
+<!-- Modal Carrito -->
+<div class="modal-overlay" id="cartModal">
+  <div class="modal">
+    <button class="modal-close" id="cartClose"><i class="fas fa-times"></i></button>
+    <h3><i class="fas fa-shopping-bag"></i> Tu carrito</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal">Total: 0,00 €</div>
+    <button class="btn-submit" id="checkoutBtn" style="grid-column:auto;width:100%"><i class="fas fa-credit-card"></i> Finalizar compra</button>
+  </div>
+</div>
+
+<!-- Modal Admin -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal">
+    <button class="modal-close" id="adminClose"><i class="fas fa-times"></i></button>
+    <h3><i class="fas fa-user-shield"></i> Panel de administración</h3>
+    <div id="adminLogin">
+      <div class="form-group" style="margin-bottom:1rem">
+        <label><i class="fas fa-lock"></i> Contraseña</label>
+        <input type="password" id="adminPass" placeholder="Contraseña">
+      </div>
+      <button class="btn-submit" id="adminLoginBtn" style="grid-column:auto;width:100%"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+      <p style="font-size:.78rem;color:var(--text-secondary);margin-top:.8rem;text-align:center">Demo: <strong>admin123</strong></p>
+    </div>
+    <div id="adminPanel" style="display:none">
+      <div class="admin-stats" id="adminStats"></div>
+      <button class="btn-submit" id="exportCsv" style="grid-column:auto;width:100%;margin-bottom:.6rem"><i class="fas fa-file-csv"></i> Exportar citas a CSV</button>
+      <button class="btn-submit" id="adminLogout" style="grid-column:auto;width:100%;background:#e74c3c"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+    </div>
+  </div>
+</div>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  const EMAILJS_SERVICE_ID  = 'TU_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID';
+  const EMAILJS_PUBLIC_KEY  = 'TU_PUBLIC_KEY';
+  const ADMIN_EMAIL = 'maifreyes826@gmail.com';
+  if (EMAILJS_PUBLIC_KEY !== 'TU_PUBLIC_KEY' && typeof emailjs !== 'undefined') {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }
+</script>
+
+<script>
+(function(){
+  // ============ PRODUCTOS ============
+  const products = [
+    {id:'botox-1',name:'Botox Capilar Premium',description:'Relleno intensivo, reduce frizz y aporta brillo espejo.',price:49.99,oldPrice:59.99,category:'botox',tag:'Botox',badge:'best',rating:4.9,reviews:87,stock:8,image:'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80'},
+    {id:'botox-2',name:'Botox Reparador Nocturno',description:'Ácido hialurónico y keratina hidrolizada.',price:57.50,category:'botox',tag:'Botox',badge:'new',rating:4.8,reviews:42,stock:5,image:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80'},
+    {id:'keratina-1',name:'Queratina Brasileña Intensa',description:'Alisado progresivo sin formol, ideal para cabellos rebeldes.',price:65.00,oldPrice:75.00,category:'queratina',tag:'Queratina',badge:'sale',rating:5.0,reviews:120,stock:12,image:'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=80'},
+    {id:'keratina-2',name:'Queratina Orgánica con Argán',description:'Vegana enriquecida con argán y vitamina E.',price:72.30,category:'queratina',tag:'Queratina',rating:4.9,reviews:65,stock:7,image:'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80'},
+    {id:'keratina-3',name:'Queratina Express 30min',description:'Brillo inmediato y control de frizz en 30 min.',price:44.90,category:'queratina',tag:'Queratina',badge:'best',rating:4.7,reviews:98,stock:15,image:'https://images.unsplash.com/photo-1631730359585-38a4935cbec4?w=600&q=80'},
+    {id:'keratina-4',name:'Queratina Profunda con Colágeno',description:'Reconstrucción interna, cabellos dañados o teñidos.',price:79.99,category:'queratina',tag:'Queratina',badge:'new',rating:4.9,reviews:33,stock:4,image:'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&q=80'}
+  ];
+  const DURATIONS = {'botox-1':60,'botox-2':75,'keratina-1':150,'keratina-2':180,'keratina-3':60,'keratina-4':180};
+  const SLOT_TIMES = ['09:00','10:00','11:00','12:00','13:00','15:00','16:00','17:00','18:00'];
+
+  let currentFilter='all', currentMaxPrice=80, selectedSlot=null, appliedDiscount=0;
+  let cart = JSON.parse(localStorage.getItem('keratin_cart') || '[]');
+  let isAdmin = false;
+
+  // ============ RENDER PRODUCTOS ============
+  const grid = document.getElementById('productsGrid');
+  function starsHTML(r,n){const full=Math.floor(r);let s='';for(let i=0;i<5;i++)s+=i<full?'★':(i===full&&r%1>=.5?'⯨':'☆');return `<div class="stars">${s}<span>${r} (${n})</span></div>`;}
+  function badgeHTML(b){
+    if(b==='best')return '<span class="product-badge badge-best">Más vendido</span>';
+    if(b==='new')return '<span class="product-badge badge-new">Nuevo</span>';
+    if(b==='sale')return '<span class="product-badge badge-sale">Oferta</span>';
+    return '';
+  }
+  function renderProducts(){
+    const list = products.filter(p=>{
+      const catOk = currentFilter==='all' || p.category===currentFilter;
+      const priceOk = p.price<=currentMaxPrice;
+      return catOk && priceOk;
+    });
+    grid.innerHTML = list.map(p=>`
+      <div class="product-card">
+        ${badgeHTML(p.badge)}
+        <img src="${p.image}" alt="${p.name}" class="product-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80'">
+        <div class="product-body">
+          <span class="product-tag ${p.category==='botox'?'tag-botox':'tag-queratina'}">${p.tag}</span>
+          <h3>${p.name}</h3>
+          <p class="product-desc">${p.description}</p>
+          ${starsHTML(p.rating,p.reviews)}
+          <div class="stock"><i class="fas fa-box"></i> Quedan ${p.stock} sesiones este mes</div>
+          <div class="product-price">${p.price.toFixed(2)} € ${p.oldPrice?`<small>${p.oldPrice.toFixed(2)} €</small>`:''} <span style="font-size:.75rem;font-weight:400;color:var(--text-secondary)">/ sesión</span></div>
+          <div class="product-actions">
+            <button class="btn-product" data-book="${p.id}"><i class="fas fa-calendar-plus"></i> Agendar</button>
+            <button class="btn-cart" data-cart="${p.id}"><i class="fas fa-cart-plus"></i> Añadir</button>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  // ============ SELECT PRODUCTOS ============
+  const productSelect = document.getElementById('productSelect');
+  function populateSelect(){
+    productSelect.innerHTML = '<option value="" disabled selected>-- Elige tratamiento --</option>'+
+      products.map(p=>`<option value="${p.id}">${p.name} · ${p.price.toFixed(2)} € · ${DURATIONS[p.id]}min</option>`).join('');
+  }
+
+  // ============ FILTROS ============
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      currentFilter = b.dataset.filter;
+      renderProducts();
+    });
+  });
+  const priceRange = document.getElementById('priceRange');
+  const priceVal = document.getElementById('priceVal');
+  priceRange.addEventListener('input',()=>{
+    currentMaxPrice = +priceRange.value;
+    priceVal.textContent = currentMaxPrice+' €';
+    renderProducts();
+  });
+
+  // ============ CARRITO ============
+  const cartModal = document.getElementById('cartModal');
+  const cartItems = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+  const cartCount = document.getElementById('cartCount');
+
+  function updateCartCount(){
+    const total = cart.reduce((s,i)=>s+i.qty,0);
+    cartCount.textContent = total;
+    localStorage.setItem('keratin_cart',JSON.stringify(cart));
+  }
+  function renderCart(){
+    if(!cart.length){cartItems.innerHTML='<p style="text-align:center;color:var(--text-secondary);padding:1rem">Tu carrito está vacío.</p>';cartTotal.textContent='Total: 0,00 €';updateCartCount();return;}
+    let total=0;
+    cartItems.innerHTML = cart.map(i=>{
+      const p = products.find(x=>x.id===i.id);
+      if(!p) return '';
+      total += p.price*i.qty;
+      return `<div class="cart-item">
+        <img src="${p.image}" alt="">
+        <div class="cart-item-info"><h5>${p.name}</h5><p>${p.price.toFixed(2)} € × ${i.qty}</p></div>
+        <button class="icon-btn danger" data-remove="${i.id}"><i class="fas fa-trash"></i></button>
+      </div>`;
+    }).join('');
+    cartTotal.textContent = `Total: ${total.toFixed(2)} €`;
+    updateCartCount();
+  }
+  function addToCart(id){
+    const item = cart.find(i=>i.id===id);
+    if(item) item.qty++;
+    else cart.push({id,qty:1});
+    renderCart();
+    showToast('Producto añadido al carrito 🛍️');
+  }
+  function removeFromCart(id){
+    cart = cart.filter(i=>i.id!==id);
+    renderCart();
+  }
+  document.getElementById('cartBtn').addEventListener('click',()=>{renderCart();cartModal.classList.add('open');});
+  document.getElementById('cartClose').addEventListener('click',()=>cartModal.classList.remove('open'));
+  cartModal.addEventListener('click',e=>{if(e.target===cartModal)cartModal.classList.remove('open')});
+  cartItems.addEventListener('click',e=>{
+    const b = e.target.closest('[data-remove]');
+    if(b) removeFromCart(b.dataset.remove);
+  });
+  document.getElementById('checkoutBtn').addEventListener('click',()=>{
+    if(!cart.length){alert('Tu carrito está vacío');return;}
+    alert('¡Gracias por tu compra! Recibirás un correo con los detalles. (Demo)');
+    cart=[];renderCart();cartModal.classList.remove('open');
+  });
+
+  // ============ SLOTS DISPONIBLES ============
+  const slotsContainer = document.getElementById('slotsContainer');
+  const dateInput = document.getElementById('appointmentDate');
+  function renderSlots(){
+    const date = dateInput.value;
+    if(!date){slotsContainer.innerHTML='<p style="font-size:.82rem;color:var(--text-secondary)">Selecciona primero una fecha.</p>';return;}
+    const appointments = loadAppointments();
+    const occupied = appointments.filter(a=>a.date===date && a.slot && a.status!=='cancelled').map(a=>a.slot);
+    slotsContainer.innerHTML = SLOT_TIMES.map(t=>{
+      const disabled = occupied.includes(t);
+      const sel = selectedSlot===t?'selected':'';
+      return `<div class="slot ${disabled?'disabled':''} ${sel}" data-slot="${t}">${t}</div>`;
+    }).join('');
+  }
+  slotsContainer.addEventListener('click',e=>{
+    const s = e.target.closest('.slot');
+    if(!s || s.classList.contains('disabled')) return;
+    selectedSlot = s.dataset.slot;
+    renderSlots();
+  });
+  dateInput.addEventListener('change',()=>{selectedSlot=null;renderSlots();checkDateAvailability();});
+
+  function checkDateAvailability(){
+    const date = dateInput.value;
+    if(!date) return;
+    const appointments = loadAppointments();
+    const occupied = appointments.filter(a=>a.date===date && a.slot && a.status!=='cancelled').map(a=>a.slot);
+    if(occupied.length>=SLOT_TIMES.length){
+      alert('Lo sentimos, esa fecha está completa. Elige otro día.');
+      dateInput.value='';
+    }
+  }
+
+  // ============ CUPÓN ============
+  document.getElementById('applyCoupon').addEventListener('click',()=>{
+    const code = document.getElementById('couponInput').value.trim().toUpperCase();
+    if(code==='KERATIN10'){appliedDiscount=10;showToast('✅ Cupón aplicado: -10%');}
+    else if(code==='BIENVENIDA'){appliedDiscount=15;showToast('✅ Cupón aplicado: -15%');}
+    else{appliedDiscount=0;showToast('❌ Cupón no válido');}
+  });
+
+  // ============ CITAS ============
+  const STORAGE_KEY='keratin_appointments';
+  function loadAppointments(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch(e){return[]}}
+  function saveAppointments(a){localStorage.setItem(STORAGE_KEY,JSON.stringify(a))}
+
+  const appointmentList = document.getElementById('appointmentList');
+  function renderAppointments(){
+    const appointments = loadAppointments();
+    if(!appointments.length){
+      appointmentList.innerHTML='<div class="empty-message">No hay citas agendadas todavía.</div>';
+      document.getElementById('nextAppointmentInfo').textContent='';
+      return;
+    }
+    const sorted=[...appointments].sort((a,b)=>new Date(b.date)-new Date(a.date));
+    appointmentList.innerHTML = sorted.map(app=>{
+      const dateObj=new Date(app.date+'T00:00:00');
+      const fd=dateObj.toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric'});
+      const p=products.find(x=>x.id===app.productId);
+      const pn=p?p.name:'Tratamiento';
+      const statusClass = app.status==='completed'?'completed':app.status==='cancelled'?'cancelled':'';
+      const badgeClass = app.status==='completed'?'badge-completed':app.status==='cancelled'?'badge-cancelled':'';
+      const badgeText = app.status==='completed'?'Completada':app.status==='cancelled'?'Cancelada':'Confirmada';
+      return `<div class="appointment-item ${statusClass}">
+        <div class="appointment-info">
+          <span><i class="fas fa-phone-alt"></i> ${app.phone}</span>
+          <span><i class="fas fa-calendar-day"></i> ${fd}</span>
+          ${app.slot?`<span><i class="fas fa-clock"></i> ${app.slot}</span>`:''}
+          <span><i class="fas fa-spa"></i> ${pn}</span>
+          ${app.stylist?`<span><i class="fas fa-user-tie"></i> ${app.stylist}</span>`:''}
+          ${app.clientName?`<span><i class="fas fa-user"></i> ${app.clientName}</span>`:''}
+        </div>
+        <div class="appointment-actions">
+          <span class="appointment-badge ${badgeClass}">${badgeText}</span>
+          ${app.status!=='completed'&&app.status!=='cancelled'?`<button class="icon-btn" data-complete="${app.id}" title="Marcar completada"><i class="fas fa-check"></i></button>`:''}
+          ${app.status!=='cancelled'?`<button class="icon-btn" data-cancel="${app.id}" title="Cancelar"><i class="fas fa-ban"></i></button>`:''}
+          <button class="icon-btn danger" data-del="${app.id}" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Cuenta regresiva a próxima cita
+    const now = new Date();
+    const upcoming = appointments.filter(a=>a.status!=='cancelled'&&new Date(a.date+'T'+(a.slot||'10:00'))>=now).sort((a,b)=>new Date(a.date)-new Date(b.date))[0];
+    if(upcoming){
+      const d = new Date(upcoming.date+'T'+(upcoming.slot||'10:00'));
+      const diff = d-now;
+      const days = Math.floor(diff/(1000*60*60*24));
+      const hrs = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+      document.getElementById('nextAppointmentInfo').innerHTML = `· Próxima cita en <strong>${days}d ${hrs}h</strong>`;
+    } else {
+      document.getElementById('nextAppointmentInfo').textContent='';
+    }
+
+    updateLoyalty();
+  }
+
+  appointmentList.addEventListener('click',e=>{
+    const del = e.target.closest('[data-del]');
+    const complete = e.target.closest('[data-complete]');
+    const cancel = e.target.closest('[data-cancel]');
+    let appts = loadAppointments();
+    if(del){
+      if(confirm('¿Eliminar esta cita definitivamente?')){
+        appts = appts.filter(x=>x.id!==del.dataset.del);
+        saveAppointments(appts);renderAppointments();
+      }
+    } else if(complete){
+      const a = appts.find(x=>x.id===complete.dataset.complete);
+      if(a){a.status='completed';saveAppointments(appts);renderAppointments();}
+    } else if(cancel){
+      const a = appts.find(x=>x.id===cancel.dataset.cancel);
+      if(a){a.status='cancelled';saveAppointments(appts);renderAppointments();}
+    }
+  });
+
+  // ============ FORMULARIO ============
+  const bookingForm = document.getElementById('bookingForm');
+  bookingForm.addEventListener('submit',e=>{
+    e.preventDefault();
+    const phone = document.getElementById('clientNumber').value.trim();
+    const date = dateInput.value;
+    const productId = productSelect.value;
+    const stylist = document.getElementById('stylistSelect').value;
+    const clientName = document.getElementById('clientName').value.trim();
+    const clientEmail = document.getElementById('clientEmail').value.trim();
+    const birthday = document.getElementById('clientBirthday').value;
+    const notes = document.getElementById('clientNotes').value.trim();
+
+    if(!phone||!date||!productId||!clientEmail){alert('Completa los campos obligatorios');return;}
+    if(!selectedSlot){alert('Selecciona un horario disponible');return;}
+
+    const today = new Date();today.setHours(0,0,0,0);
+    if(new Date(date+'T00:00:00')<today){alert('La fecha no puede ser anterior a hoy');return;}
+
+    const product = products.find(p=>p.id===productId);
+    let finalPrice = product.price;
+    if(appliedDiscount) finalPrice = finalPrice*(1-appliedDiscount/100);
+
+    // Cumpleaños
+    let birthdayMsg='';
+    if(birthday){
+      const bd = new Date(birthday);
+      const todayD = new Date();
+      if(bd.getDate()===todayD.getDate() && bd.getMonth()===todayD.getMonth()){
+        finalPrice = finalPrice*0.8;
+        birthdayMsg = ' ¡Feliz cumpleaños! -20% aplicado 🎂';
+      }
+    }
+
+    const newApp = {
+      id: Date.now()+'-'+Math.random().toString(36).substr(2,6),
+      phone,date,slot:selectedSlot,productId,stylist,clientName:clientName||null,
+      clientEmail,birthday,notes,price:finalPrice,discount:appliedDiscount,
+      status:'confirmed',createdAt:new Date().toISOString()
+    };
+
+    const appts = loadAppointments();
+    appts.push(newApp);
+    saveAppointments(appts);
+
+    // EmailJS
+    if(EMAILJS_PUBLIC_KEY!=='TU_PUBLIC_KEY' && typeof emailjs!=='undefined'){
+      const dateFmt = new Date(date+'T00:00:00').toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+      emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,{
+        to_email:ADMIN_EMAIL,client_email:clientEmail,client_name:clientName||'Cliente',
+        client_phone:phone,appointment_date:dateFmt,appointment_slot:selectedSlot,
+        product_name:product.name,product_price:finalPrice.toFixed(2)+' €',
+        stylist:stylist||'Sin preferencia',
+        message:`Nueva cita. Cliente: ${clientName||'N/A'} · Tel: ${phone} · Email: ${clientEmail} · Tratamiento: ${product.name} · Fecha: ${dateFmt} ${selectedSlot} · Estilista: ${stylist||'N/A'} · Precio: ${finalPrice.toFixed(2)}€`
+      }).then(()=>console.log('✅ Email enviado')).catch(e=>console.error('❌',e));
+    }
+
+    // Google Calendar
+    const start = new Date(date+'T'+selectedSlot+':00');
+    const end = new Date(start.getTime()+DURATIONS[productId]*60000);
+    const gcal = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Keratin Studio · '+product.name)}&dates=${start.toISOString().replace(/-|:|\.\d+/g,'')}/${end.toISOString().replace(/-|:|\.\d+/g,'')}&details=${encodeURIComponent('Cliente: '+(clientName||'N/A')+'\nTel: '+phone+'\nEmail: '+clientEmail+'\nEstilista: '+(stylist||'N/A')+'\nPrecio: '+finalPrice.toFixed(2)+'€')}&location=Keratin%20Studio`;
+    window.open(gcal,'_blank');
+
+    // Confeti
+    launchConfetti();
+
+    bookingForm.reset();
+    selectedSlot=null;appliedDiscount=0;
+    renderSlots();renderAppointments();
+    showToast('¡Cita agendada! Revisa tu correo 💜'+birthdayMsg);
+    document.querySelector('.appointments-section').scrollIntoView({behavior:'smooth'});
+  });
+
+  // ============ FIDELIDAD ============
+  function updateLoyalty(){
+    const appts = loadAppointments().filter(a=>a.status==='completed');
+    const count = Math.min(appts.length,5);
+    document.getElementById('loyaltyCount').textContent = count;
+    const dots = document.getElementById('loyaltyDots');
+    dots.innerHTML='';
+    for(let i=1;i<=5;i++){
+      const d = document.createElement('div');
+      d.className='loyalty-dot'+(i<=count?' filled':'');
+      d.innerHTML = i<=count?'★':i;
+      dots.appendChild(d);
+    }
+  }
+
+  // ============ TESTIMONIOS CARRUSEL ============
+  const testiTrack = document.getElementById('testiTrack');
+  const testiDots = document.getElementById('testiDots');
+  const totalTesti = testiTrack.children.length;
+  let currentTesti=0;
+  for(let i=0;i<totalTesti;i++){
+    const b = document.createElement('button');
+    b.className='testi-dot'+(i===0?' active':'');
+    b.addEventListener('click',()=>goTesti(i));
+    testiDots.appendChild(b);
+  }
+  function goTesti(i){
+    currentTesti=i;
+    testiTrack.style.transform=`translateX(-${i*100}%)`;
+    document.querySelectorAll('.testi-dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));
+  }
+  setInterval(()=>goTesti((currentTesti+1)%totalTesti),5000);
+
+  // ============ ANTES/DESPUÉS ============
+  const baContainer = document.getElementById('baContainer');
+  const baAfter = baContainer.querySelector('.ba-after');
+  const baHandle = document.getElementById('baHandle');
+  let dragging=false;
+  function setBA(x){
+    const rect = baContainer.getBoundingClientRect();
+    let pct = ((x-rect.left)/rect.width)*100;
+    pct = Math.max(0,Math.min(100,pct));
+    baAfter.style.clipPath = `inset(0 ${100-pct}% 0 0)`;
+    baHandle.style.left = pct+'%';
+  }
+  baContainer.addEventListener('mousedown',e=>{dragging=true;setBA(e.clientX)});
+  window.addEventListener('mousemove',e=>{if(dragging)setBA(e.clientX)});
+  window.addEventListener('mouseup',()=>dragging=false);
+  baContainer.addEventListener('touchstart',e=>{dragging=true;setBA(e.touches[0].clientX)},{passive:true});
+  baContainer.addEventListener('touchmove',e=>{if(dragging){setBA(e.touches[0].clientX);e.preventDefault()}},{passive:false});
+  baContainer.addEventListener('touchend',()=>dragging=false);
+
+  // ============ FAQ ============
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>q.parentElement.classList.toggle('open'));
+  });
+
+  // ============ NEWSLETTER ============
+  document.getElementById('newsletterForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const email = document.getElementById('newsletterEmail').value;
+    if(EMAILJS_PUBLIC_KEY!=='TU_PUBLIC_KEY' && typeof emailjs!=='undefined'){
+      emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,{to_email:ADMIN_EMAIL,client_email:email,message:'Nueva suscripción a newsletter: '+email}).catch(()=>{});
+    }
+    showToast('¡Suscrito! Gracias 💌');
+    e.target.reset();
+  });
+
+  // ============ ADMIN ============
+  const adminModal = document.getElementById('adminModal');
+  document.getElementById('adminBtn').addEventListener('click',()=>adminModal.classList.add('open'));
+  document.getElementById('adminClose').addEventListener('click',()=>adminModal.classList.remove('open'));
+  adminModal.addEventListener('click',e=>{if(e.target===adminModal)adminModal.classList.remove('open')});
+  document.getElementById('adminLoginBtn').addEventListener('click',()=>{
+    const pass = document.getElementById('adminPass').value;
+    if(pass==='admin123'){
+      isAdmin=true;
+      document.getElementById('adminLogin').style.display='none';
+      document.getElementById('adminPanel').style.display='block';
+      renderAdminStats();
+    } else alert('Contraseña incorrecta');
+  });
+  document.getElementById('adminLogout').addEventListener('click',()=>{
+    isAdmin=false;
+    document.getElementById('adminLogin').style.display='block';
+    document.getElementById('adminPanel').style.display='none';
+    document.getElementById('adminPass').value='';
+    adminModal.classList.remove('open');
+  });
+  function renderAdminStats(){
+    const a = loadAppointments();
+    const total=a.length;
+    const confirmed=a.filter(x=>x.status==='confirmed').length;
+    const completed=a.filter(x=>x.status==='completed').length;
+    const cancelled=a.filter(x=>x.status==='cancelled').length;
+    document.getElementById('adminStats').innerHTML=`
+      <div class="admin-stat"><strong>${total}</strong><span>Total</span></div>
+      <div class="admin-stat"><strong>${confirmed}</strong><span>Confirmadas</span></div>
+      <div class="admin-stat"><strong>${completed}</strong><span>Completadas</span></div>
+      <div class="admin-stat"><strong>${cancelled}</strong><span>Canceladas</span></div>`;
+  }
+  document.getElementById('exportCsv').addEventListener('click',()=>{
+    const a = loadAppointments();
+    if(!a.length){alert('No hay citas para exportar');return;}
+    const headers = ['ID','Teléfono','Fecha','Hora','Producto','Estilista','Cliente','Email','Estado','Precio'];
+    const rows = a.map(x=>{
+      const p = products.find(pp=>pp.id===x.productId);
+      return [x.id,x.phone,x.date,x.slot||'',p?p.name:'',x.stylist||'',x.clientName||'',x.clientEmail||'',x.status||'confirmed',x.price?x.price.toFixed(2):''];
+    });
+    const csv = [headers,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href=url;link.download='citas_keratin_studio.csv';link.click();
+    URL.revokeObjectURL(url);
+    showToast('CSV descargado ✅');
+  });
+
+  // ============ MODO NOCHE ============
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle.querySelector('i');
+  function applyTheme(night){
+    document.body.classList.toggle('night-mode',night);
+    themeIcon.className = night?'fas fa-sun':'fas fa-moon';
+    localStorage.setItem('keratin_theme',night?'night':'day');
+  }
+  applyTheme(localStorage.getItem('keratin_theme')==='night');
+  themeToggle.addEventListener('click',()=>applyTheme(!document.body.classList.contains('night-mode')));
+
+  // ============ FRASE DEL DÍA ============
+  const quotes = [
+    'El cabello es el accesorio más importante que llevarás siempre. 💇‍♀️',
+    'Un buen tratamiento no cambia tu esencia, la realza. ✨',
+    'El brillo de tu cabello refleja tu energía interior. 💜',
+    'La queratina no es magia, es ciencia al servicio de tu belleza. 🔬',
+    'Cada cita es un pequeño acto de amor propio. 🌸',
+    'Luce un cabello espectacular, te lo mereces. 👑'
+  ];
+  document.getElementById('dailyQuote').textContent = quotes[new Date().getDay()%quotes.length];
+
+  // ============ CONTADORES ANIMADOS ============
+  function animateCounters(){
+    document.querySelectorAll('.counter-num').forEach(el=>{
+      const target = +el.dataset.target;
+      let cur = 0;
+      const step = target/60;
+      const timer = setInterval(()=>{
+        cur += step;
+        if(cur>=target){cur=target;clearInterval(timer);}
+        el.textContent = Math.floor(cur).toLocaleString('es-ES');
+      },20);
+    });
+  }
+
+  // ============ REVEAL SCROLL ============
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('visible');
+        if(en.target.querySelector('.counter-num')) animateCounters();
+      }
+    });
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // ============ CONFETI ============
+  function launchConfetti(){
+    const colors = ['#5a3d8a','#b28dd6','#d4af37','#e74c3c','#27ae60','#f39c12'];
+    for(let i=0;i<80;i++){
+      const c = document.createElement('div');
+      c.className='confetti';
+      c.style.left = Math.random()*100+'vw';
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.animationDuration = (2+Math.random()*2)+'s';
+      c.style.animationDelay = Math.random()*0.3+'s';
+      if(Math.random()>0.5) c.style.borderRadius='50%';
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),5000);
+    }
+  }
+
+  // ============ TOAST ============
+  function showToast(msg){
+    const t = document.createElement('div');
+    t.textContent = msg;
+    Object.assign(t.style,{
+      position:'fixed',bottom:'90px',left:'50%',transform:'translateX(-50%)',
+      background:'var(--accent)',color:'#fff',padding:'.8rem 1.5rem',
+      borderRadius:'50px',boxShadow:'0 8px 22px rgba(0,0,0,.3)',
+      zIndex:3000,fontWeight:'600',fontSize:'.9rem',opacity:'0',
+      transition:'opacity .3s,transform .3s',pointerEvents:'none'
+    });
+    document.body.appendChild(t);
+    requestAnimationFrame(()=>{t.style.opacity='1';t.style.transform='translateX(-50%) translateY(-10px)'});
+    setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),400)},2800);
+  }
+
+  // ============ BOTONES PRODUCTOS ============
+  grid.addEventListener('click',e=>{
+    const book = e.target.closest('[data-book]');
+    const cartB = e.target.closest('[data-cart]');
+    if(book){
+      productSelect.value = book.dataset.book;
+      document.getElementById('agendar').scrollIntoView({behavior:'smooth'});
+      setTimeout(()=>document.getElementById('clientNumber').focus(),600);
+    }
+    if(cartB) addToCart(cartB.dataset.cart);
+  });
+
+  // ============ ESTILISTAS ============
+  document.querySelectorAll('[data-stylist]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.getElementById('stylistSelect').value = b.dataset.stylist;
+      document.getElementById('agendar').scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // ============ INIT ============
+  function init(){
+    renderProducts();
+    populateSelect();
+    renderSlots();
+    renderAppointments();
+    updateCartCount();
+    const today = new Date();
+    dateInput.min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    const t = new Date(today);t.setDate(t.getDate()+1);
+    dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+    renderSlots();
+  }
+  init();
+
+  // Service Worker inline (PWA)
+  if('serviceWorker' in navigator){
+    const swCode = `self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>self.clients.claim());self.addEventListener('fetch',e=>{});`;
+    const blob = new Blob([swCode],{type:'application/javascript'});
+    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+  }
+})();
+</script>
+</body>
+</html>
